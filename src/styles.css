@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+.note{
+    font-family: "MusiQwik";
+    font-size: 20em;
+  }
+  
+  .undernote{
+      margin-left: -34px;
+      z-index: -5;
+  }
+  
+  @font-face {
+    font-family: "MusiQwik";
+    src: url("assets/MusiQwik.ttf") format("truetype");
+  }
+  #notesDiv{
+    text-align:center;
+  }
