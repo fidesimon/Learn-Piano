@@ -3,6 +3,8 @@ export class Notes{
     private _flatsString: string;
     private _sharpsString: string;
     private _emptyLine: string;
+    private _clef: string;
+
     constructor(){
         this.init();
     }
@@ -11,7 +13,14 @@ export class Notes{
             this._flatsString = "àáãâäåæçèéêëìíî"; //to be used to display flat symbol
             this._sharpsString = "ÐÑÓÒÔÕÖ×ØÙÚÛÜÝÞ"; //to be used to display flat symbol 
             this._emptyLine = "=";
-            //¯-bass clef     &-treble clef
+            this._clef = "¯"; //¯-bass clef     &-treble clef
+    }
+
+    public ChangeClef(clef : string) : void {
+        if(clef.toLowerCase() === "bass")
+            this._clef = "¯";
+        else if(clef.toLowerCase() === "treble")
+            this._clef = "&";
     }
 
     private generateRandomNote() : string{
@@ -19,7 +28,7 @@ export class Notes{
     }
 
     public GetNoteString() : string {
-        return "¯===" + this.generateRandomNote() + "====";
+        return this._clef + "===" + this.generateRandomNote() + "====";
     }
 }
 
@@ -33,6 +42,13 @@ export class HandlerFunctionality{
 
     initialize(){
         document.addEventListener('keydown', this.handler.bind(this));
+        var clefDropDown = document.getElementById("clefDropDown");
+        clefDropDown.addEventListener('change', this.changeClef.bind(this));
+    }
+
+    changeClef(){
+        var selectedClef = (<HTMLInputElement>document.getElementById("clefDropDown")).value;
+        this._notesObject.ChangeClef(selectedClef);
     }
 
     handler(e){
