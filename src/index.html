@@ -6,7 +6,6 @@
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" type="text/stylesheet" href="styles.css" />
 
 </head>
@@ -14,10 +13,12 @@
   <app-root></app-root>
   <div id="notesDiv" class="note"></div>
   <div id="pianoSettings">
-    <select id="clefDropDown">
+    Select Clef: <select id="clefDropDown">
       <option value="bassClef">Bass</option>
       <option value="trebleClef">Treble</option>
     </select>
+    <br />
+    <input type="checkbox" id="autoCheckBox" /><label for="autoCheckBox">Auto-display</label>
   </div>
 </body>
 </html>
