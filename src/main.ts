@@ -15,6 +15,8 @@ platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.log(err));
 
 (function(){
-  var note = new Notes();
-  var hand = new HandlerFunctionality(note);
+  document.addEventListener("DOMContentLoaded", function(){
+    var note = new Notes();
+    var hand = new HandlerFunctionality(note);
+  });
 })();
