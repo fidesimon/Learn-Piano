@@ -310,7 +310,10 @@ export class Practice{
     }
     
     private generateRandomNote(): string {
-        return this._notesString[(Math.floor(Math.random() * (this._notesString.length)))];
+        var randForAccidental = Math.floor(Math.random() * 3);
+        var noteIndex = Math.floor(Math.random() * (this._notesString.length));
+        var accidental = randForAccidental == 0 ? this._flatsString[noteIndex] : randForAccidental == 2 ? this._sharpsString[noteIndex] : "";
+        return accidental + this._notesString[noteIndex];
     }
 
     private getNoteString(): string {
@@ -321,6 +324,6 @@ export class Practice{
         }
 
         this.CurrentNote = newNote;
-        return this.Settings.Clef + "===" + newNote + "====";
+        return this.Settings.Clef + (newNote.length == 1 ? "===" : "==") + newNote + "====";
     }
 }
