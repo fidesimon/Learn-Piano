@@ -1,56 +1,60 @@
 import { WebMidi } from "./../node_modules/@types/webmidi/index";
 
-export enum ClefEnum{
+export enum ClefEnum {
     Bass = "¯",
     Treble = "&"
 }
 
-export interface IPianoEventHandling{
+export interface IPianoEventHandling {
     ClefChange(): void;
-    AutoPlayChange() : void;
-    IntervalChange() : void;
-    ManualNoteChange(e : any) : void;
+    AutoPlayChange(): void;
+    IntervalChange(): void;
+    ManualNoteChange(e: any): void;
 }
 
-export interface IPracticeSettings{
+export interface IPracticeSettings {
     Clef: ClefEnum;
     AutoPlay: boolean;
     Interval: number;
     MidiEnabled: boolean;
+    PlayRecordedNotes: boolean;
 }
 
-export class PracticeSettings implements IPracticeSettings{
+export class PracticeSettings implements IPracticeSettings {
     Clef: ClefEnum;
     AutoPlay: boolean;
     Interval: number;
     MidiEnabled: boolean;
+    PlayRecordedNotes: boolean;
 
     constructor() {
         this.initialize();
     }
 
-    initialize(){
+    initialize() {
         this.Clef = ClefEnum.Bass;
         this.AutoPlay = false;
         this.Interval = 1000;
+        this.PlayRecordedNotes = false;
+        this.MidiEnabled = true;
     }
 }
 
-export class PianoEventHandlers implements IPianoEventHandling{
+export class PianoEventHandlers implements IPianoEventHandling {
     private _practice: Practice;
     private _intervalVal: number;
 
-    constructor(practice: Practice){
+    constructor(practice: Practice) {
         this._practice = practice;
         this.initialize();
     }
 
-    initialize(){
+    initialize() {
         this._registerEventHandlers();
         this.ClefChange();
     }
 
-    private _registerEventHandlers(){
+    private _registerEventHandlers() {
         document.addEventListener('keydown', this.ManualNoteChange.bind(this));
         var clefDropDown = document.getElementById("clefDropDown");
         clefDropDown.addEventListener('change', this.ClefChange.bind(this));
@@ -58,11 +62,25 @@ export class PianoEventHandlers implements IPianoEventHandling{
         autoCheckBox.addEventListener('change', this.AutoPlayChange.bind(this));
         var intervalTextBox = document.getElementById("intervalTextBox");
         intervalTextBox.addEventListener('change', this.IntervalChange.bind(this));
+        var playRecordedCheckBox = document.getElementById("playRecordedCheckBox");
+        playRecordedCheckBox.addEventListener('change', this.PlayRecordedChange.bind(this));
     }
 
-    ClefChange(){
+    PlayRecordedChange() {
+        var playRecorded = <HTMLInputElement>document.getElementById("playRecordedCheckBox");
+        this._practice.Settings.PlayRecordedNotes = playRecorded.checked;
+        var settings = document.getElementById("pianoSettings");
+
+        if (playRecorded.checked) {
+            settings.style.display = "none";
+        } else {
+            settings.style.display = "block";
+        }
+    }
+
+    ClefChange() {
         var selectedClef = (<HTMLInputElement>document.getElementById("clefDropDown")).value;
-        if(selectedClef == "bass"){
+        if (selectedClef == "bass") {
             this._practice.Settings.Clef = ClefEnum.Bass;
             this._practice.NotesMap = {
                 "`": 36,
@@ -112,8 +130,7 @@ export class PianoEventHandlers implements IPianoEventHandling{
                 "Þn": 61
             };
         }
-        else
-        {
+        else {
             this._practice.Settings.Clef = ClefEnum.Treble;
             this._practice.NotesMap = {
                 "`": 57,
@@ -167,7 +184,7 @@ export class PianoEventHandlers implements IPianoEventHandling{
         document.getElementById("clefDropDown").blur();
     }
 
-    AutoPlayChange(){
+    AutoPlayChange() {
         var autoDisplay = <HTMLInputElement>document.getElementById("autoCheckBox");
         this._practice.Settings.AutoPlay = autoDisplay.checked;
         var intervalTextBox = <HTMLInputElement>document.getElementById("intervalTextBox");
@@ -183,7 +200,7 @@ export class PianoEventHandlers implements IPianoEventHandling{
         document.getElementById("autoCheckBox").blur();
     }
 
-    IntervalChange(){
+    IntervalChange() {
         var intervalTextBox = <HTMLInputElement>document.getElementById("intervalTextBox");
         var interval = +(intervalTextBox.value);
         if (this._intervalVal !== null) { //means that interval is executing
@@ -193,7 +210,7 @@ export class PianoEventHandlers implements IPianoEventHandling{
         document.getElementById("intervalTextBox").blur();
     }
 
-    ManualNoteChange(e){
+    ManualNoteChange(e) {
         var key = window.event ? e.keyCode : e.which;
         this._practice.RenderStaff();
     }
@@ -212,13 +229,13 @@ export interface MIDINavigator extends Navigator {
     requestMIDIAccess(options?: WebMidi.MIDIOptions): Promise<WebMidi.MIDIAccess>;
 }
 
-export class MidiComponent{
+export class MidiComponent {
     context = null;   // the Web Audio "context" object
     midiAccess = null;  // the MIDIAccess object.
     activeNotes = []; // the stack of actively-pressed keys
     private _practice: Practice;
 
-    constructor(practice: Practice){
+    constructor(practice: Practice) {
         this._practice = practice;
         this.context = new AudioContext();
 
@@ -229,7 +246,7 @@ export class MidiComponent{
     }
 
     private _checkNote(note) {
-        if(this._practice.NotesMap[this._practice.CurrentNote] === note){
+        if (this._practice.NotesMap[this._practice.CurrentNote] === note) {
             this._practice.RenderStaff();
         }
     }
@@ -279,36 +296,36 @@ export class MidiComponent{
     }
 }
 
-export class Piano{
+export class Piano {
     _practice: Practice;
     _eventHandlers: PianoEventHandlers;
     _midiComponent: MidiComponent;
 
-    constructor(){
+    constructor() {
         this._practice = new Practice();
         this._eventHandlers = new PianoEventHandlers(this._practice);
         this._midiComponent = new MidiComponent(this._practice);
     }
 }
 
-export class Practice{
+export class Practice {
     public CurrentNote: string;
     public NotesMap: {};
     public Settings: PracticeSettings;
     private _notesString = "`abcdefghijklmn";
-    private _flatsString = "àáâãäåæçèéêëìíî"; 
+    private _flatsString = "àáâãäåæçèéêëìíî";
     private _sharpsString = "ÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞ";
     private _emptyLine = "=";
 
-    constructor(){
+    constructor() {
         this.Settings = new PracticeSettings();
         this.RenderStaff();
     }
 
-    public RenderStaff(){
+    public RenderStaff() {
         document.getElementById("notesDiv").innerText = this.getNoteString();
     }
-    
+
     private generateRandomNote(): string {
         var randForAccidental = Math.floor(Math.random() * 3);
         var noteIndex = Math.floor(Math.random() * (this._notesString.length));
@@ -319,11 +336,18 @@ export class Practice{
     private getNoteString(): string {
         var newNote = this.CurrentNote;
 
-        while(this.CurrentNote == newNote){
+        while (this.CurrentNote == newNote) {
             newNote = this.generateRandomNote();
         }
 
         this.CurrentNote = newNote;
         return this.Settings.Clef + (newNote.length == 1 ? "===" : "==") + newNote + "====";
     }
+}
+
+export class RecordNotes {
+    private _recordStarted: false;
+    private _recordingMap: {};
+
+
 }
