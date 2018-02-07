@@ -64,17 +64,33 @@ export class PianoEventHandlers implements IPianoEventHandling {
         intervalTextBox.addEventListener('change', this.IntervalChange.bind(this));
         var playRecordedCheckBox = document.getElementById("playRecordedCheckBox");
         playRecordedCheckBox.addEventListener('change', this.PlayRecordedChange.bind(this));
+        var startButton = document.getElementById("startButton");
+        startButton.addEventListener('click', this.StartRecorded.bind(this));
+    }
+
+    StartRecorded() {
+        var startButton = document.getElementById("startButton");
+        var recordString = <HTMLTextAreaElement>document.getElementById("recordString");
+        if (recordString.value == "") {
+            alert("please provide the record string");
+            return;
+        }
+        startButton.textContent = "Stop";
+
     }
 
     PlayRecordedChange() {
         var playRecorded = <HTMLInputElement>document.getElementById("playRecordedCheckBox");
         this._practice.Settings.PlayRecordedNotes = playRecorded.checked;
         var settings = document.getElementById("pianoSettings");
+        var recordDiv = document.getElementById("recordDiv");
 
         if (playRecorded.checked) {
             settings.style.display = "none";
+            recordDiv.style.display = "block";
         } else {
             settings.style.display = "block";
+            recordDiv.style.display = "none";
         }
     }
 
@@ -212,7 +228,9 @@ export class PianoEventHandlers implements IPianoEventHandling {
 
     ManualNoteChange(e) {
         var key = window.event ? e.keyCode : e.which;
-        this._practice.RenderStaff();
+        if (e.keyCode == 32) {
+            this._practice.RenderStaff();
+        }
     }
 
     private _startInterval(interval: number) {
@@ -323,7 +341,24 @@ export class Practice {
     }
 
     public RenderStaff() {
-        document.getElementById("notesDiv").innerText = this.getNoteString();
+        if (!this.Settings.PlayRecordedNotes) {
+            document.getElementById("notesDiv").innerText = this.getNoteString();
+        } else {
+            document.getElementById("notesDiv").innerText = this.getRecordedNoteString();
+        }
+    }
+
+    private getRecordedNoteString() {
+        var notesString = <HTMLTextAreaElement>document.getElementById("recordString");
+        var firstNote: string;
+        if (notesString.value.length != 0) {
+            firstNote = notesString.value[0];//.charAt(0);
+            notesString.value = notesString.value.substr(1);
+        } else {
+            firstNote = "=";
+        }
+        this.CurrentNote = firstNote;
+        return this.Settings.Clef + "===" + firstNote + "====";
     }
 
     private generateRandomNote(): string {
@@ -335,7 +370,7 @@ export class Practice {
 
     private getNoteString(): string {
         var newNote = this.CurrentNote;
-
+        
         while (this.CurrentNote == newNote) {
             newNote = this.generateRandomNote();
         }

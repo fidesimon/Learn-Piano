@@ -16,8 +16,12 @@
   <div id="notesDiv" class="note"></div>
   <div id="settings">
     <div id="recorded">
-        <input type="checkbox" id="playRecordedCheckBox" />
-        <label for="playRecordedCheckBox">Play Recorded Notes</label>
+      <input type="checkbox" id="playRecordedCheckBox" />
+      <label for="playRecordedCheckBox">Play Recorded Notes</label>
+      <div id="recordDiv" style="display:none;">
+        <textarea id="recordString"></textarea>
+        <button id="startButton">Start</button>
+      </div>
     </div>
     <div id="pianoSettings">
       Select Clef:
