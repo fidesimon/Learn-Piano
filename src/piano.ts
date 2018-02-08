@@ -255,12 +255,25 @@ export class MidiComponent {
 
     constructor(practice: Practice) {
         this._practice = practice;
-        this.context = new AudioContext();
+        
 
-        if ((<MIDINavigator>navigator).requestMIDIAccess)
+        this.linkRefreshButton();
+        this.initialize();
+    }
+
+    private linkRefreshButton(){
+        var refreshLink = document.getElementById("midiRefresh");
+        refreshLink.addEventListener('click', this.initialize.bind(this));
+    }
+
+    private initialize() {
+        this.midiAccess = null;
+        this.context = new AudioContext();
+        if ((<MIDINavigator>navigator).requestMIDIAccess) {
             (<MIDINavigator>navigator).requestMIDIAccess().then(this.onMIDIInit.bind(this), this.onMIDIReject.bind(this));
-        else
+        } else {
             alert("No MIDI support present in your browser. You're gonna have a bad time.");
+        }
     }
 
     private _checkNote(note) {
@@ -271,15 +284,20 @@ export class MidiComponent {
 
     onMIDIInit(midi) {
         this.midiAccess = midi;
+        var midiDeviceSpanElement = document.getElementById("midiDevice");
 
         var haveAtLeastOneDevice = false;
         var inputs = this.midiAccess.inputs.values();
         for (var input = inputs.next(); input && !input.done; input = inputs.next()) {
             input.value.onmidimessage = this.MIDIMessageEventHandler.bind(this);
             haveAtLeastOneDevice = true;
+            midiDeviceSpanElement.innerText = input.value.name;
         }
-        if (!haveAtLeastOneDevice)
-            alert("No MIDI input devices present. You're gonna have a bad time.");
+        if (!haveAtLeastOneDevice){
+            midiDeviceSpanElement.innerText = "None";
+        }else{
+            var input = inputs[0];
+        }
     }
 
     onMIDIReject(err) {
@@ -370,7 +388,7 @@ export class Practice {
 
     private getNoteString(): string {
         var newNote = this.CurrentNote;
-        
+
         while (this.CurrentNote == newNote) {
             newNote = this.generateRandomNote();
         }

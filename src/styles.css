@@ -16,3 +16,10 @@
   #notesDiv{
     text-align:center;
   }
+  #midiSettings{
+    text-align:center;
+  }
+
+  #midiDevice{
+    font-weight: bold;
+  }

@@ -12,7 +12,11 @@
 </head>
 
 <body>
-  <app-root></app-root>
+  <div id="midiSettings">
+    <span>Midi device connected: </span>
+    <span id="midiDevice">none</span>
+    <span id="midiRefresh"> --Click to refresh--</span>
+  </div>
   <div id="notesDiv" class="note"></div>
   <div id="settings">
     <div id="recorded">
@@ -36,6 +40,7 @@
       <input type="number" disabled="disabled" id="intervalTextBox" value="1000" /> Refresh Interval (ms)
     </div>
   </div>
+  <app-root></app-root>
 </body>
 
 </html>
