@@ -1,4 +1,4 @@
-import { Practice } from "./piano";
+import { Practice } from "./Practice";
 import { ClefEnum } from "./PracticeSettings";
 
 export interface IPianoEventHandling {

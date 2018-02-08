@@ -1,5 +1,5 @@
 import { WebMidi } from "./../../node_modules/@types/webmidi/index";
-import { Practice } from "./piano";
+import { Practice } from "./Practice";
 
 export interface MIDINavigator extends Navigator {
     requestMIDIAccess(options?: WebMidi.MIDIOptions): Promise<WebMidi.MIDIAccess>;
@@ -30,7 +30,7 @@ export class MidiComponent {
         if ((<MIDINavigator>navigator).requestMIDIAccess) {
             (<MIDINavigator>navigator).requestMIDIAccess().then(this.onMIDIInit.bind(this), this.onMIDIReject.bind(this));
         } else {
-            alert("No MIDI support present in your browser. You're gonna have a bad time.");
+            alert("No MIDI support present in your browser.");
         }
     }
 
@@ -59,7 +59,7 @@ export class MidiComponent {
     }
 
     onMIDIReject(err) {
-        alert("The MIDI system failed to start. You're gonna have a bad time.");
+        alert("The MIDI system failed to start.");
     }
 
     MIDIMessageEventHandler(event) {
