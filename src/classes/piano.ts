@@ -1,43 +1,11 @@
-import { WebMidi } from "./../node_modules/@types/webmidi/index";
-
-export enum ClefEnum {
-    Bass = "¯",
-    Treble = "&"
-}
+import { WebMidi } from "./../../node_modules/@types/webmidi/index";
+import { PracticeSettings, ClefEnum } from "./PracticeSettings"
 
 export interface IPianoEventHandling {
     ClefChange(): void;
     AutoPlayChange(): void;
     IntervalChange(): void;
     ManualNoteChange(e: any): void;
-}
-
-export interface IPracticeSettings {
-    Clef: ClefEnum;
-    AutoPlay: boolean;
-    Interval: number;
-    MidiEnabled: boolean;
-    PlayRecordedNotes: boolean;
-}
-
-export class PracticeSettings implements IPracticeSettings {
-    Clef: ClefEnum;
-    AutoPlay: boolean;
-    Interval: number;
-    MidiEnabled: boolean;
-    PlayRecordedNotes: boolean;
-
-    constructor() {
-        this.initialize();
-    }
-
-    initialize() {
-        this.Clef = ClefEnum.Bass;
-        this.AutoPlay = false;
-        this.Interval = 1000;
-        this.PlayRecordedNotes = false;
-        this.MidiEnabled = true;
-    }
 }
 
 export class PianoEventHandlers implements IPianoEventHandling {
