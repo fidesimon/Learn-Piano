@@ -1,4 +1,4 @@
-import { PracticeSettings, ClefEnum } from "./PracticeSettings";
+import { PracticeSettings } from "./PracticeSettings";
 import { PianoEventHandlers } from "./PianoEventHandlers";
 import { MidiComponent } from "./MidiComponent";
 import { Practice } from "./Practice";

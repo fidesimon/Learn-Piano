@@ -1,5 +1,5 @@
 import { Practice } from "./Practice";
-import { ClefEnum } from "./PracticeSettings";
+import { ClefEnum } from "./Enums";
 
 export interface IPianoEventHandling {
     ClefChange(): void;

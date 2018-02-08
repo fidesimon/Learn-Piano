@@ -1,4 +1,5 @@
 import { PracticeSettings } from "./PracticeSettings";
+import { ClefEnum } from "./Enums";
 
 export class Practice {
     public CurrentNote: string;

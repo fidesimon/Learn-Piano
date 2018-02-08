@@ -1,7 +1,4 @@
-export enum ClefEnum {
-    Bass = "¯",
-    Treble = "&"
-}
+import { ClefEnum } from "./Enums";
 
 export interface IPracticeSettings {
     Clef: ClefEnum;
