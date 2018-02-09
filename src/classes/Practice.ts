@@ -1,5 +1,6 @@
 import { PracticeSettings } from "./PracticeSettings";
 import { ClefEnum } from "./Enums";
+import { CONST } from "./Constants";
 
 export class Practice {
     public CurrentNote: string;
@@ -17,17 +18,17 @@ export class Practice {
 
     public RenderStaff() {
         if (!this.Settings.PlayRecordedNotes) {
-            document.getElementById("notesDiv").innerText = this.getNoteString();
+            document.getElementById(CONST.PIANONotesDiv).innerText = this.getNoteString();
         } else {
-            document.getElementById("notesDiv").innerText = this.getRecordedNoteString();
+            document.getElementById(CONST.PIANONotesDiv).innerText = this.getRecordedNoteString();
         }
     }
 
     private getRecordedNoteString() {
-        var notesString = <HTMLTextAreaElement>document.getElementById("recordString");
+        var notesString = <HTMLTextAreaElement>document.getElementById(CONST.PIANORecordString);
         var firstNote: string;
         if (notesString.value.length != 0) {
-            firstNote = notesString.value[0];//.charAt(0);
+            firstNote = notesString.value[0];
             notesString.value = notesString.value.substr(1);
         } else {
             firstNote = "=";
