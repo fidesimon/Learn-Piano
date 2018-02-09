@@ -1,5 +1,6 @@
 import { Practice } from "./Practice";
 import { ClefEnum } from "./Enums";
+import { CONST } from "./Constants";
 
 export interface IPianoEventHandling {
     ClefChange(): void;
@@ -24,21 +25,21 @@ export class PianoEventHandlers implements IPianoEventHandling {
 
     private _registerEventHandlers() {
         document.addEventListener('keydown', this.ManualNoteChange.bind(this));
-        var clefDropDown = document.getElementById("clefDropDown");
+        var clefDropDown = document.getElementById(CONST.PIANOClefDropDown);
         clefDropDown.addEventListener('change', this.ClefChange.bind(this));
-        var autoCheckBox = document.getElementById("autoCheckBox");
+        var autoCheckBox = document.getElementById(CONST.PIANOAutoCheckBox);
         autoCheckBox.addEventListener('change', this.AutoPlayChange.bind(this));
-        var intervalTextBox = document.getElementById("intervalTextBox");
+        var intervalTextBox = document.getElementById(CONST.PIANOIntervalTextBox);
         intervalTextBox.addEventListener('change', this.IntervalChange.bind(this));
-        var playRecordedCheckBox = document.getElementById("playRecordedCheckBox");
+        var playRecordedCheckBox = document.getElementById(CONST.PIANOPlayRecordedCheckBox);
         playRecordedCheckBox.addEventListener('change', this.PlayRecordedChange.bind(this));
-        var startButton = document.getElementById("startButton");
+        var startButton = document.getElementById(CONST.PIANOStartButton);
         startButton.addEventListener('click', this.StartRecorded.bind(this));
     }
 
     StartRecorded() {
-        var startButton = document.getElementById("startButton");
-        var recordString = <HTMLTextAreaElement>document.getElementById("recordString");
+        var startButton = document.getElementById(CONST.PIANOStartButton);
+        var recordString = <HTMLTextAreaElement>document.getElementById(CONST.PIANORecordString);
         if (recordString.value == "") {
             alert("please provide the record string");
             return;
@@ -48,10 +49,10 @@ export class PianoEventHandlers implements IPianoEventHandling {
     }
 
     PlayRecordedChange() {
-        var playRecorded = <HTMLInputElement>document.getElementById("playRecordedCheckBox");
+        var playRecorded = <HTMLInputElement>document.getElementById(CONST.PIANOPlayRecordedCheckBox);
         this._practice.Settings.PlayRecordedNotes = playRecorded.checked;
-        var settings = document.getElementById("pianoSettings");
-        var recordDiv = document.getElementById("recordDiv");
+        var settings = document.getElementById(CONST.PIANOSettingsDiv);
+        var recordDiv = document.getElementById(CONST.PIANORecordDiv);
 
         if (playRecorded.checked) {
             settings.style.display = "none";
@@ -63,7 +64,7 @@ export class PianoEventHandlers implements IPianoEventHandling {
     }
 
     ClefChange() {
-        var selectedClef = (<HTMLInputElement>document.getElementById("clefDropDown")).value;
+        var selectedClef = (<HTMLInputElement>document.getElementById(CONST.PIANOClefDropDown)).value;
         if (selectedClef == "bass") {
             this._practice.Settings.Clef = ClefEnum.Bass;
             this._practice.NotesMap = {
@@ -165,13 +166,13 @@ export class PianoEventHandlers implements IPianoEventHandling {
             };
         }
         this._practice.RenderStaff();
-        document.getElementById("clefDropDown").blur();
+        document.getElementById(CONST.PIANOClefDropDown).blur();
     }
 
     AutoPlayChange() {
-        var autoDisplay = <HTMLInputElement>document.getElementById("autoCheckBox");
+        var autoDisplay = <HTMLInputElement>document.getElementById(CONST.PIANOAutoCheckBox);
         this._practice.Settings.AutoPlay = autoDisplay.checked;
-        var intervalTextBox = <HTMLInputElement>document.getElementById("intervalTextBox");
+        var intervalTextBox = <HTMLInputElement>document.getElementById(CONST.PIANOIntervalTextBox);
 
         if (autoDisplay.checked) {
             var intervalValue = +(intervalTextBox.value); // +(string) -> TypeScript converts string to number
@@ -181,17 +182,17 @@ export class PianoEventHandlers implements IPianoEventHandling {
             intervalTextBox.disabled = true;
             this._stopInterval();
         }
-        document.getElementById("autoCheckBox").blur();
+        document.getElementById(CONST.PIANOAutoCheckBox).blur();
     }
 
     IntervalChange() {
-        var intervalTextBox = <HTMLInputElement>document.getElementById("intervalTextBox");
+        var intervalTextBox = <HTMLInputElement>document.getElementById(CONST.PIANOIntervalTextBox);
         var interval = +(intervalTextBox.value);
         if (this._intervalVal !== null) { //means that interval is executing
             this._stopInterval();
             this._startInterval(interval);
         }
-        document.getElementById("intervalTextBox").blur();
+        document.getElementById(CONST.PIANOIntervalTextBox).blur();
     }
 
     ManualNoteChange(e) {
