@@ -1,5 +1,6 @@
 import { WebMidi } from "./../../node_modules/@types/webmidi/index";
 import { Practice } from "./Practice";
+import { CONST } from "./Constants";
 
 export interface MIDINavigator extends Navigator {
     requestMIDIAccess(options?: WebMidi.MIDIOptions): Promise<WebMidi.MIDIAccess>;
@@ -20,7 +21,7 @@ export class MidiComponent {
     }
 
     private linkRefreshButton(){
-        var refreshLink = document.getElementById("midiRefresh");
+        var refreshLink = document.getElementById(CONST.MIDIRefreshElement);
         refreshLink.addEventListener('click', this.initialize.bind(this));
     }
 
@@ -42,7 +43,7 @@ export class MidiComponent {
 
     onMIDIInit(midi) {
         this.midiAccess = midi;
-        var midiDeviceSpanElement = document.getElementById("midiDevice");
+        var midiDeviceSpanElement = document.getElementById(CONST.MIDIDeviceElement);
 
         var haveAtLeastOneDevice = false;
         var inputs = this.midiAccess.inputs.values();
