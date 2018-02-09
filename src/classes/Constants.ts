@@ -10,4 +10,5 @@ export class CONST{
     public static PIANOSettingsDiv = "pianoSettings";
     public static PIANORecordDiv = "recordDiv";
     public static PIANORecordString = "recordString";
+    public static PIANONotesDiv = "notesDiv";
 }
