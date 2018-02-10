@@ -3,6 +3,7 @@ import { ClefEnum } from "./Enums";
 export interface IPracticeSettings {
     Clef: ClefEnum;
     AutoPlay: boolean;
+    Accidentals: boolean;
     Interval: number;
     MidiEnabled: boolean;
     PlayRecordedNotes: boolean;
@@ -11,6 +12,7 @@ export interface IPracticeSettings {
 export class PracticeSettings implements IPracticeSettings {
     Clef: ClefEnum;
     AutoPlay: boolean;
+    Accidentals: boolean;
     Interval: number;
     MidiEnabled: boolean;
     PlayRecordedNotes: boolean;
@@ -22,6 +24,7 @@ export class PracticeSettings implements IPracticeSettings {
     initialize() {
         this.Clef = ClefEnum.Bass;
         this.AutoPlay = false;
+        this.Accidentals = false;
         this.Interval = 1000;
         this.PlayRecordedNotes = false;
         this.MidiEnabled = true;
