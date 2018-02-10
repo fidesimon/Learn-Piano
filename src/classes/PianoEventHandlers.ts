@@ -1,6 +1,7 @@
 import { Practice } from "./Practice";
 import { ClefEnum } from "./Enums";
 import { CONST } from "./Constants";
+import { notImplemented } from "@angular/core/src/render3/util";
 
 export interface IPianoEventHandling {
     ClefChange(): void;
@@ -29,12 +30,18 @@ export class PianoEventHandlers implements IPianoEventHandling {
         clefDropDown.addEventListener('change', this.ClefChange.bind(this));
         var autoCheckBox = document.getElementById(CONST.PIANOAutoCheckBox);
         autoCheckBox.addEventListener('change', this.AutoPlayChange.bind(this));
+        var accidentalsCheckBox = document.getElementById(CONST.PIANOAccidentalsCheckBox);
+        accidentalsCheckBox.addEventListener('change', this.AccidentalsChange.bind(this));
         var intervalTextBox = document.getElementById(CONST.PIANOIntervalTextBox);
         intervalTextBox.addEventListener('change', this.IntervalChange.bind(this));
         var playRecordedCheckBox = document.getElementById(CONST.PIANOPlayRecordedCheckBox);
         playRecordedCheckBox.addEventListener('change', this.PlayRecordedChange.bind(this));
         var startButton = document.getElementById(CONST.PIANOStartButton);
         startButton.addEventListener('click', this.StartRecorded.bind(this));
+    }
+
+    AccidentalsChange(){
+        notImplemented();
     }
 
     StartRecorded() {
