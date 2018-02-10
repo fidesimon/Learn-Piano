@@ -38,10 +38,14 @@ export class Practice {
     }
 
     private generateRandomNote(): string {
-        var randForAccidental = Math.floor(Math.random() * 3);
         var noteIndex = Math.floor(Math.random() * (this._notesString.length));
-        var accidental = randForAccidental == 0 ? this._flatsString[noteIndex] : randForAccidental == 2 ? this._sharpsString[noteIndex] : "";
-        return accidental + this._notesString[noteIndex];
+
+        if (this.Settings.Accidentals) {
+            var randForAccidental = Math.floor(Math.random() * 3);
+            var accidental = randForAccidental == 0 ? this._flatsString[noteIndex] : randForAccidental == 2 ? this._sharpsString[noteIndex] : "";
+            return accidental + this._notesString[noteIndex];        
+        }
+        return this._notesString[noteIndex];
     }
 
     private getNoteString(): string {
