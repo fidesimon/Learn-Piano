@@ -41,7 +41,8 @@ export class PianoEventHandlers implements IPianoEventHandling {
     }
 
     AccidentalsChange(){
-        notImplemented();
+        var accidentals = <HTMLInputElement>document.getElementById(CONST.PIANOAccidentalsCheckBox);
+        this._practice.Settings.Accidentals = accidentals.checked;
     }
 
     StartRecorded() {
