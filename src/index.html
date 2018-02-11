@@ -12,37 +12,50 @@
 </head>
 
 <body>
-  <div id="midiSettings">
-    <span>Midi device connected: </span>
-    <span id="midiDevice">none</span>
-    <span id="midiRefresh"> --Click to refresh--</span>
-  </div>
-  <div id="notesDiv" class="note"></div>
-  <div id="settings">
-    <div id="recorded">
-      <input type="checkbox" id="playRecordedCheckBox" />
-      <label for="playRecordedCheckBox">Play Recorded Notes</label>
-      <div id="recordDiv" style="display:none;">
-        <textarea id="recordString"></textarea>
-        <button id="startButton">Start</button>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container">
+
+      <div id="settings" class="row">
+        <div id="pianoSettings" class="col-md-6">
+          <select id="clefDropDown" class="form-control">
+            <option value="bass">Bass Clef</option>
+            <option value="treble">Treble Clef</option>
+          </select>
+          <br />
+          <input type="checkbox" id="accidentalsCheckBox" />
+          <label for="accidentalsCheckBox">Accidentals</label>
+          <br />
+          <input type="checkbox" id="autoCheckBox" />
+          <label for="autoCheckBox">Auto-display</label>
+          <br />
+          <div id="intervalDiv" style="display:none;">
+            <input type="number" disabled="disabled" id="intervalTextBox" value="1000" /> Refresh Interval (ms)
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div id="recorded">
+            <input type="checkbox" id="playRecordedCheckBox" />
+            <label for="playRecordedCheckBox">Play Recorded Notes</label>
+            <div id="recordDiv" style="display:none;">
+              <textarea id="recordString"></textarea>
+              <button id="startButton">Start</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div id="pianoSettings">
-      Select Clef:
-      <select id="clefDropDown">
-        <option value="bass">Bass</option>
-        <option value="treble">Treble</option>
-      </select>
-      <br />
-      <input type="checkbox" id="autoCheckBox" />
-      <label for="autoCheckBox">Auto-display</label>
-      <br />
-      <input type="checkbox" id="accidentalsCheckBox" />
-      <label for="accidentalsCheckBox">Accidentals</label>
-      <br />
-      <input type="number" disabled="disabled" id="intervalTextBox" value="1000" /> Refresh Interval (ms)
+  </nav>
+  <nav class="navbar navbar-light bg-light">
+    <div id="midiSettings">
+      <span>Midi device connected: </span>
+      <span id="midiDevice">none</span>
+      <span id="midiRefresh"> (--Click to refresh--)</span>
     </div>
-  </div>
+  </nav>
+  <div id="notesDiv" class="note"></div>
+
+
+
   <app-root></app-root>
 </body>
 

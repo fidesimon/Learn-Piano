@@ -3,26 +3,55 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
 .note{
-    font-family: "MusiQwik";
-    font-size: 16em;
-  }
-  
-  .undernote{
-      margin-left: -34px;
-      z-index: -5;
-  }
-  
-  @font-face {
-    font-family: "MusiQwik";
-    src: url("assets/MusiQwik.ttf") format("truetype");
-  }
-  #notesDiv{
-    text-align:center;
-  }
-  #midiSettings{
-    text-align:center;
-  }
+  font-family: "MusiQwik";
+  font-size: 16em;
+}
 
-  #midiDevice{
-    font-weight: bold;
-  }
+.undernote{
+    margin-left: -34px;
+    z-index: -5;
+}
+
+@font-face {
+  font-family: "MusiQwik";
+  src: url("assets/MusiQwik.ttf") format("truetype");
+}
+#notesDiv{
+  text-align:center;
+}
+
+#midiDevice{
+  font-weight: bold;
+  text-align: center;
+}
+
+.navbar-dark{
+  color:white;
+}
+
+input[type=checkbox]{
+  width: 2em;
+  height: 2em;
+}
+
+label{
+  position:relative;
+  top: -0.5em;
+}
+
+#settings{
+  width: 100%;
+}
+
+.row{
+  width: 100%;
+}
+
+.navbar-light{
+  text-align: center;
+}
+
+#midiSettings{
+  margin-left: auto;
+  margin-right: auto;
+}
