@@ -181,13 +181,16 @@ export class PianoEventHandlers implements IPianoEventHandling {
         var autoDisplay = <HTMLInputElement>document.getElementById(CONST.PIANOAutoCheckBox);
         this._practice.Settings.AutoPlay = autoDisplay.checked;
         var intervalTextBox = <HTMLInputElement>document.getElementById(CONST.PIANOIntervalTextBox);
+        var pianoIntervalDiv = document.getElementById(CONST.PIANOIntervalDiv);
 
         if (autoDisplay.checked) {
             var intervalValue = +(intervalTextBox.value); // +(string) -> TypeScript converts string to number
             intervalTextBox.disabled = false;
+            pianoIntervalDiv.style.display = "block";
             this._startInterval(intervalValue);
         } else {
             intervalTextBox.disabled = true;
+            pianoIntervalDiv.style.display = "none";
             this._stopInterval();
         }
         document.getElementById(CONST.PIANOAutoCheckBox).blur();

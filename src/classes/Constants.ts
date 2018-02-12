@@ -5,6 +5,7 @@ export class CONST{
     public static PIANOClefDropDown = "clefDropDown";
     public static PIANOAutoCheckBox = "autoCheckBox";
     public static PIANOIntervalTextBox = "intervalTextBox";
+    public static PIANOIntervalDiv = "intervalDiv";
     public static PIANOPlayRecordedCheckBox = "playRecordedCheckBox";
     public static PIANOStartButton = "startButton";
     public static PIANOSettingsDiv = "pianoSettings";
