@@ -16,17 +16,14 @@
   font-family: "MusiQwik";
   src: url("assets/MusiQwik.ttf") format("truetype");
 }
-#notesDiv{
+#notesDiv, #dupa{
   text-align:center;
+  margin-top: 0.1em;
 }
 
 #midiDevice{
   font-weight: bold;
   text-align: center;
-}
-
-.navbar-dark{
-  color:white;
 }
 
 input[type=checkbox]{
@@ -54,4 +51,64 @@ label{
 #midiSettings{
   margin-left: auto;
   margin-right: auto;
+}
+
+#containerz{
+  position:relative;
+}
+#containerzz{
+  background-color:rgba(255,255,255,0.96);
+  flex: 1 1 auto;
+}
+
+.navi, .infoi {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.infoi {
+  z-index: 10;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+body{
+  overflow-x: hidden;
+  background-image: url("/assets/background.jpeg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  height: 100%;
+}
+
+.box {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.navbar-background{
+  background-color: rgba(0,0,0,0.45);
+  color:white;
+  border-bottom: 1px solid #333333;
+  
+}
+
+.navbar{
+  flex: 0 1 auto;
+}
+
+html{
+  height: 100%;
 }

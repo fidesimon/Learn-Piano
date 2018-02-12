@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>PianoTest2</title>
+  <title>I'm learning piano</title>
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,51 +12,57 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-dark bg-dark">
-    <div class="container">
+  <div class="box">
+    <nav class="navbar">
+      <div id="midiSettings">
+        <span>Midi device connected: </span>
+        <span id="midiDevice">none</span>
+        <span id="midiRefresh"> (--Click to refresh--)</span>
+      </div>
+    </nav>
+    <nav class="navbar navbar-background">
+      <div class="container">
 
-      <div id="settings" class="row">
-        <div id="pianoSettings" class="col-md-6">
-          <select id="clefDropDown" class="form-control">
-            <option value="bass">Bass Clef</option>
-            <option value="treble">Treble Clef</option>
-          </select>
-          <br />
-          <input type="checkbox" id="accidentalsCheckBox" />
-          <label for="accidentalsCheckBox">Accidentals</label>
-          <br />
-          <input type="checkbox" id="autoCheckBox" />
-          <label for="autoCheckBox">Auto-display</label>
-          <br />
-          <div id="intervalDiv" style="display:none;">
-            <input type="number" disabled="disabled" id="intervalTextBox" value="1000" /> Refresh Interval (ms)
+        <div id="settings" class="row">
+          <div id="pianoSettings" class="col-md-6">
+            <select id="clefDropDown" class="form-control">
+              <option value="bass">Bass Clef</option>
+              <option value="treble">Treble Clef</option>
+            </select>
+            <br />
+            <input type="checkbox" id="accidentalsCheckBox" />
+            <label for="accidentalsCheckBox">Accidentals</label>
+            <br />
+            <input type="checkbox" id="autoCheckBox" />
+            <label for="autoCheckBox">Auto-display</label>
+            <br />
+            <div id="intervalDiv" style="display:none;">
+              <input type="number" disabled="disabled" id="intervalTextBox" value="1000" /> Refresh Interval (ms)
+            </div>
           </div>
-        </div>
-        <div class="col-md-6">
-          <div id="recorded">
-            <input type="checkbox" id="playRecordedCheckBox" />
-            <label for="playRecordedCheckBox">Play Recorded Notes</label>
-            <div id="recordDiv" style="display:none;">
-              <textarea id="recordString"></textarea>
-              <button id="startButton">Start</button>
+          <div class="col-md-6">
+            <div id="recorded">
+              <input type="checkbox" id="playRecordedCheckBox" />
+              <label for="playRecordedCheckBox">Play Recorded Notes</label>
+              <div id="recordDiv" style="display:none;">
+                <textarea id="recordString"></textarea>
+                <button id="startButton">Start</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
+    </nav>
+    <div id="containerzz">
+      <div id="containerz">
+
+        <div id="dupa" class="note navi noselect">============================================</div>
+        <div id="notesDiv" class="note infoi noselect"></div>
+      </div>
     </div>
-  </nav>
-  <nav class="navbar navbar-light bg-light">
-    <div id="midiSettings">
-      <span>Midi device connected: </span>
-      <span id="midiDevice">none</span>
-      <span id="midiRefresh"> (--Click to refresh--)</span>
-    </div>
-  </nav>
-  <div id="notesDiv" class="note"></div>
+    <app-root></app-root>
 
-
-
-  <app-root></app-root>
+  </div>
 </body>
 
 </html>

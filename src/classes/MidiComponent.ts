@@ -54,8 +54,10 @@ export class MidiComponent {
         }
         if (!haveAtLeastOneDevice){
             midiDeviceSpanElement.innerText = "None";
+            midiDeviceSpanElement.parentElement.parentElement.style.backgroundColor = "#ff8888";
         }else{
             var input = inputs[0];
+            midiDeviceSpanElement.parentElement.parentElement.style.backgroundColor = "#f5f5f5";            
         }
     }
 
