@@ -30,8 +30,15 @@
               <option value="treble">Treble Clef</option>
             </select>
             <br />
-            <input type="checkbox" id="accidentalsCheckBox" />
-            <label for="accidentalsCheckBox">Accidentals</label>
+            <div id="accidentals" class="row">
+              <div class="col-md-4">
+                  <input type="checkbox" id="accidentalsCheckBox" />
+                  <label for="accidentalsCheckBox">Accidentals</label>
+              </div>
+              <div class="col-md-4"></div>
+              <div class="col-md-4"></div>
+              
+            </div>
             <br />
             <input type="checkbox" id="autoCheckBox" />
             <label for="autoCheckBox">Auto-display</label>
@@ -55,8 +62,8 @@
     </nav>
     <div id="containerzz">
       <div id="containerz">
-
         <div id="dupa" class="note navi noselect">============================================</div>
+        <div id="clef" class="note infoi noselect">¯</div>
         <div id="notesDiv" class="note infoi noselect"></div>
       </div>
     </div>

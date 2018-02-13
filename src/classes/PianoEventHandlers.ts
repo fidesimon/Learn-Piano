@@ -73,6 +73,7 @@ export class PianoEventHandlers implements IPianoEventHandling {
 
     ClefChange() {
         var selectedClef = (<HTMLInputElement>document.getElementById(CONST.PIANOClefDropDown)).value;
+        var clefElement = document.getElementById(CONST.PIANOClefDiv);
         if (selectedClef == "bass") {
             this._practice.Settings.Clef = ClefEnum.Bass;
             this._practice.NotesMap = {
@@ -173,6 +174,7 @@ export class PianoEventHandlers implements IPianoEventHandling {
                 "Þn": 82
             };
         }
+        clefElement.innerText = this._practice.Settings.Clef;
         this._practice.RenderStaff();
         document.getElementById(CONST.PIANOClefDropDown).blur();
     }

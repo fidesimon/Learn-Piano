@@ -20,6 +20,9 @@
   text-align:center;
   margin-top: 0.1em;
 }
+#clef{
+  margin-top: 0.1em;
+}
 
 #midiDevice{
   font-weight: bold;

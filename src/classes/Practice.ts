@@ -34,7 +34,7 @@ export class Practice {
             firstNote = "=";
         }
         this.CurrentNote = firstNote;
-        return this.Settings.Clef + "===" + firstNote + "====";
+        return firstNote;
     }
 
     private generateRandomNote(): string {
@@ -56,6 +56,6 @@ export class Practice {
         }
 
         this.CurrentNote = newNote;
-        return this.Settings.Clef + (newNote.length == 1 ? "===" : "==") + newNote + "====";
+        return newNote;
     }
 }
