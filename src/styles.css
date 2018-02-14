@@ -16,12 +16,11 @@
   font-family: "MusiQwik";
   src: url("assets/MusiQwik.ttf") format("truetype");
 }
-#notesDiv, #dupa{
-  text-align:center;
+#dupa, #notesDiv, #clef{
   margin-top: 0.1em;
 }
-#clef{
-  margin-top: 0.1em;
+#notesDiv{
+  margin-left: 1em;
 }
 
 #midiDevice{

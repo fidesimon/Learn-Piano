@@ -4,6 +4,7 @@ import { CONST } from "./Constants";
 
 export class Practice {
     public CurrentNote: string;
+    public CurrentNotes: string;
     public NotesMap: {};
     public Settings: PracticeSettings;
     private _notesString = "`abcdefghijklmn";
@@ -11,16 +12,38 @@ export class Practice {
     private _sharpsString = "ÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞ";
     private _emptyLine = "=";
 
+    public MultipleNotes: boolean = true;
+    public NumberOfNotes: number = 10;
+
     constructor() {
         this.Settings = new PracticeSettings();
+        this.CurrentNotes = "";
         this.RenderStaff();
     }
 
     public RenderStaff() {
-        if (!this.Settings.PlayRecordedNotes) {
-            document.getElementById(CONST.PIANONotesDiv).innerText = this.getNoteString();
-        } else {
-            document.getElementById(CONST.PIANONotesDiv).innerText = this.getRecordedNoteString();
+        if (!this.MultipleNotes) {
+            if (!this.Settings.PlayRecordedNotes) {
+                document.getElementById(CONST.PIANONotesDiv).innerText = this.getNoteString();
+            } else {
+                document.getElementById(CONST.PIANONotesDiv).innerText = this.getRecordedNoteString();
+            }
+        }else{
+            if (this.CurrentNotes.length > 1) {
+                this.CurrentNotes = this.CurrentNotes.slice(1);
+            } else {
+                var newNotes = "";
+                for (var i = 0; i < this.NumberOfNotes; i++) {
+                    newNotes += this.generateRandomNote();
+                }
+                this.CurrentNotes = newNotes;
+            }
+            var diff = this.NumberOfNotes - this.CurrentNotes.length;
+            var retString = ('==').repeat(diff);
+            for(var i = 0; i < this.CurrentNotes.length; i++){
+                retString += this.CurrentNotes[i] + "=";
+            }
+            document.getElementById(CONST.PIANONotesDiv).innerText = retString;
         }
     }
 
@@ -37,13 +60,13 @@ export class Practice {
         return firstNote;
     }
 
-    private generateRandomNote(): string {
+    public generateRandomNote(): string {
         var noteIndex = Math.floor(Math.random() * (this._notesString.length));
 
         if (this.Settings.Accidentals) {
             var randForAccidental = Math.floor(Math.random() * 3);
             var accidental = randForAccidental == 0 ? this._flatsString[noteIndex] : randForAccidental == 2 ? this._sharpsString[noteIndex] : "";
-            return accidental + this._notesString[noteIndex];        
+            return accidental + this._notesString[noteIndex];
         }
         return this._notesString[noteIndex];
     }

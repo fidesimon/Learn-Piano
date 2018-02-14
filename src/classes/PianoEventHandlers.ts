@@ -175,7 +175,7 @@ export class PianoEventHandlers implements IPianoEventHandling {
             };
         }
         clefElement.innerText = this._practice.Settings.Clef;
-        this._practice.RenderStaff();
+        //this._practice.RenderStaff();
         document.getElementById(CONST.PIANOClefDropDown).blur();
     }
 

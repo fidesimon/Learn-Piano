@@ -14,13 +14,13 @@ export class MidiComponent {
 
     constructor(practice: Practice) {
         this._practice = practice;
-        
+
 
         this.linkRefreshButton();
         this.initialize();
     }
 
-    private linkRefreshButton(){
+    private linkRefreshButton() {
         var refreshLink = document.getElementById(CONST.MIDIRefreshElement);
         refreshLink.addEventListener('click', this.initialize.bind(this));
     }
@@ -36,8 +36,14 @@ export class MidiComponent {
     }
 
     private _checkNote(note) {
-        if (this._practice.NotesMap[this._practice.CurrentNote] === note) {
-            this._practice.RenderStaff();
+        if (!this._practice.MultipleNotes) {
+            if (this._practice.NotesMap[this._practice.CurrentNote] === note) {
+                this._practice.RenderStaff();
+            }
+        } else {
+            if (this._practice.NotesMap[this._practice.CurrentNotes[0]] === note) {
+                this._practice.RenderStaff();
+            }
         }
     }
 
@@ -52,12 +58,12 @@ export class MidiComponent {
             haveAtLeastOneDevice = true;
             midiDeviceSpanElement.innerText = input.value.name;
         }
-        if (!haveAtLeastOneDevice){
+        if (!haveAtLeastOneDevice) {
             midiDeviceSpanElement.innerText = "None";
             midiDeviceSpanElement.parentElement.parentElement.style.backgroundColor = "#ff8888";
-        }else{
+        } else {
             var input = inputs[0];
-            midiDeviceSpanElement.parentElement.parentElement.style.backgroundColor = "#f5f5f5";            
+            midiDeviceSpanElement.parentElement.parentElement.style.backgroundColor = "#f5f5f5";
         }
     }
 
