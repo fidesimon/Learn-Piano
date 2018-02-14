@@ -36,6 +36,8 @@ export class PianoEventHandlers implements IPianoEventHandling {
         intervalTextBox.addEventListener('change', this.IntervalChange.bind(this));
         var playRecordedCheckBox = document.getElementById(CONST.PIANOPlayRecordedCheckBox);
         playRecordedCheckBox.addEventListener('change', this.PlayRecordedChange.bind(this));
+        var multipleNotesCheckBox = document.getElementById(CONST.PIANOMultipleNotesCheckBox);
+        multipleNotesCheckBox.addEventListener('change', this.ChangeMultipleNotes.bind(this));
         var startButton = document.getElementById(CONST.PIANOStartButton);
         startButton.addEventListener('click', this.StartRecorded.bind(this));
     }
@@ -54,6 +56,12 @@ export class PianoEventHandlers implements IPianoEventHandling {
         }
         startButton.textContent = "Stop";
 
+    }
+
+    ChangeMultipleNotes(){
+        var multipleNotes = <HTMLInputElement>document.getElementById(CONST.PIANOMultipleNotesCheckBox);
+        this._practice.MultipleNotes = multipleNotes.checked;
+        this._practice.RenderStaff();
     }
 
     PlayRecordedChange() {
@@ -175,7 +183,6 @@ export class PianoEventHandlers implements IPianoEventHandling {
             };
         }
         clefElement.innerText = this._practice.Settings.Clef;
-        //this._practice.RenderStaff();
         document.getElementById(CONST.PIANOClefDropDown).blur();
     }
 

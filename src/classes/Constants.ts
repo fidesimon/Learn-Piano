@@ -14,4 +14,5 @@ export class CONST{
     public static PIANONotesDiv = "notesDiv";
     public static PIANOAccidentalsCheckBox = "accidentalsCheckBox";
     public static PIANOClefDiv = "clef";
+    public static PIANOMultipleNotesCheckBox = "multipleNotesCheckBox";
 }
