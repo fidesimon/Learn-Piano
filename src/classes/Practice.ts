@@ -21,7 +21,7 @@ export class Practice {
         this.RenderStaff();
     }
 
-    public RenderStaff() {
+    public RenderStaff(removeNote?: boolean) {
         if (!this.MultipleNotes) {
             if (!this.Settings.PlayRecordedNotes) {
                 document.getElementById(CONST.PIANONotesDiv).innerText = this.getNoteString();
@@ -29,7 +29,7 @@ export class Practice {
                 document.getElementById(CONST.PIANONotesDiv).innerText = this.getRecordedNoteString();
             }
         }else{
-            if (this.CurrentNotes.length > 1) {
+            if (this.CurrentNotes.length > 1 && removeNote == true) {
                 this.CurrentNotes = this.CurrentNotes.slice(1);
             } else {
                 var newNotes = "";

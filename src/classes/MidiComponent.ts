@@ -42,7 +42,7 @@ export class MidiComponent {
             }
         } else {
             if (this._practice.NotesMap[this._practice.CurrentNotes[0]] === note) {
-                this._practice.RenderStaff();
+                this._practice.RenderStaff(true);
             }
         }
     }
