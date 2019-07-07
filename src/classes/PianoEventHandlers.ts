@@ -2,6 +2,7 @@ import { Practice } from "./Practice";
 import { ClefEnum } from "./Enums";
 import { CONST } from "./Constants";
 import { notImplemented } from "@angular/core/src/render3/util";
+import { $ } from "protractor";
 
 export interface IPianoEventHandling {
     ClefChange(): void;
@@ -40,6 +41,23 @@ export class PianoEventHandlers implements IPianoEventHandling {
         multipleNotesCheckBox.addEventListener('change', this.ChangeMultipleNotes.bind(this));
         var startButton = document.getElementById(CONST.PIANOStartButton);
         startButton.addEventListener('click', this.StartRecorded.bind(this));
+        var noteThreshold = document.getElementsByName("threshold");
+        for(var i = 0; i < noteThreshold.length; i++){
+            noteThreshold[i].addEventListener('click', this.ThresholdChanged.bind(this));
+        }
+    }
+
+    ThresholdChanged() {
+        var noteThreshold = document.getElementsByName("threshold");
+        var value = 50;
+        for (var i = 0; i < noteThreshold.length; i++){
+            if((<HTMLInputElement>noteThreshold[i]).checked == true){
+                value = +((<HTMLInputElement>noteThreshold[i]).value);
+                break;
+            }
+        }
+        this._practice.Settings.NoteThreshold = value;
+        this._practice.RenderStaff();
     }
 
     AccidentalsChange(){

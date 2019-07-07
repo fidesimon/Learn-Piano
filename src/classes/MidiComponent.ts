@@ -1,4 +1,5 @@
-import { WebMidi } from "./../../node_modules/@types/webmidi/index";
+//import { WebMidi } from "./../../node_modules/@types/webmidi/index";
+import { WebMidi } from './../../node_modules/@types/webmidi/index';
 import { Practice } from "./Practice";
 import { CONST } from "./Constants";
 

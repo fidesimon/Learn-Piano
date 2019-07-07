@@ -52,7 +52,11 @@
               <input type="checkbox" id="playRecordedCheckBox" />
               <label for="playRecordedCheckBox">Play Recorded Notes</label><br />
               <input type="checkbox" id="multipleNotesCheckBox" checked="checked" />
-              <label for="multipleNotesCheckBox">Multiple Notes</label>
+              <label for="multipleNotesCheckBox">Multiple Notes</label><br />
+              <label><input type="radio" name="threshold" value="3"> 3</label><br />
+              <label><input type="radio" name="threshold" value="5"> 5</label><br />
+              <label><input type="radio" name="threshold" value="8"> 8</label><br />
+              <label><input type="radio" name="threshold" value="50" checked> X</label>
               <div id="recordDiv" style="display:none;">
                 <textarea id="recordString"></textarea>
                 <button id="startButton">Start</button>

@@ -7,6 +7,7 @@ export interface IPracticeSettings {
     Interval: number;
     MidiEnabled: boolean;
     PlayRecordedNotes: boolean;
+    NoteThreshold: number;
 }
 
 export class PracticeSettings implements IPracticeSettings {
@@ -16,6 +17,7 @@ export class PracticeSettings implements IPracticeSettings {
     Interval: number;
     MidiEnabled: boolean;
     PlayRecordedNotes: boolean;
+    NoteThreshold: number;
 
     constructor() {
         this.initialize();
@@ -28,5 +30,6 @@ export class PracticeSettings implements IPracticeSettings {
         this.Interval = 1000;
         this.PlayRecordedNotes = false;
         this.MidiEnabled = true;
+        this.NoteThreshold = 50;
     }
 }

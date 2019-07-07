@@ -32,9 +32,16 @@ export class Practice {
             if (this.CurrentNotes.length > 1 && removeNote == true) {
                 this.CurrentNotes = this.CurrentNotes.slice(1);
             } else {
-                var newNotes = "";
-                for (var i = 0; i < this.NumberOfNotes; i++) {
-                    newNotes += this.generateRandomNote();
+                var newNotes = this.generateRandomNote();
+                let noteLocation : number = this._notesString.indexOf(newNotes);
+
+                for (var i = 1; i < this.NumberOfNotes; i++) {
+                    let newNote = this.generateRandomNote();
+                    while ((Math.abs(noteLocation - this._notesString.indexOf(newNote)) > this.Settings.NoteThreshold)) {
+                        newNote = this.generateRandomNote();
+                    }
+                    newNotes += newNote;
+                    noteLocation = this._notesString.indexOf(newNote);
                 }
                 this.CurrentNotes = newNotes;
             }
@@ -74,7 +81,10 @@ export class Practice {
     private getNoteString(): string {
         var newNote = this.CurrentNote;
 
-        while (this.CurrentNote == newNote) {
+        //get location of the note so that we can make sure that note is within range of 10 notes from previous one
+        var noteLocation : number = this._notesString.indexOf(this.CurrentNote);
+
+        while (this.CurrentNote == newNote || (Math.abs(noteLocation - this._notesString.indexOf(newNote)) < 3)) {
             newNote = this.generateRandomNote();
         }
 
